@@ -10,7 +10,13 @@ export default function CreateNewCircular() {
             <h1>Create new Circular</h1>
           </div>
           <div className="main-text-circular-container">
-            <div className="Circular-title">title</div>
+            <div className="Circular-title">
+              <input
+                type="text"
+                name="circular-title"
+                placeholder="Circular heading"
+              />
+            </div>
             <div className="Circular-text">
               <input
                 type="text"
@@ -20,11 +26,16 @@ export default function CreateNewCircular() {
             </div>
             <br></br>
             <div>
-              <div className="clr-poasted-by" placeholder="Staff Name"></div>
+              <div className="clr-poasted-by">
+                <input type="text" name="staff-name" placeholder="Staff Name" />
+              </div>
               <div className="posted-date ">
                 <input type="Date" />
               </div>
             </div>
+          </div>
+          <div className="submit-circular">
+            <button type="submit">Submit</button>
           </div>
         </div>
       </div>
