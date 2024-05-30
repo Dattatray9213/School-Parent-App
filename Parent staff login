@@ -1,0 +1,213 @@
+Here's a comprehensive solution for the described login form in React, with separate handling for "Staff" and "Parents". The code includes reading the JSON file for staff credentials and querying a mock database for parent credentials.
+
+### `Home.js`
+This file will contain the login form with radio buttons for selecting "Staff" or "Parents".
+
+```jsx
+// Home.js
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+
+const Home = () => {
+  const [userType, setUserType] = useState('Staff');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [registrationId, setRegistrationId] = useState('');
+  const history = useHistory();
+
+  const handleLogin = async () => {
+    if (userType === 'Staff') {
+      try {
+        const response = await axios.get('/users.json');
+        const users = response.data;
+        const user = users.find(user => user.username === username && user.password === password);
+        if (user) {
+          history.push('/StaffDashboard');
+        } else {
+          alert('Invalid credentials for Staff');
+        }
+      } catch (error) {
+        console.error('Error fetching users.json:', error);
+      }
+    } else if (userType === 'Parents') {
+      try {
+        const response = await axios.post('/api/login', { registrationId, password });
+        if (response.data.success) {
+          history.push('/ParentDashboard');
+        } else {
+          alert('Invalid credentials for Parents');
+        }
+      } catch (error) {
+        console.error('Error logging in:', error);
+      }
+    }
+  };
+
+  return (
+    <div>
+      <h2>Login Form</h2>
+      <div>
+        <label>
+          <input
+            type="radio"
+            value="Staff"
+            checked={userType === 'Staff'}
+            onChange={() => setUserType('Staff')}
+          />
+          Staff
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="Parents"
+            checked={userType === 'Parents'}
+            onChange={() => setUserType('Parents')}
+          />
+          Parents
+        </label>
+      </div>
+      {userType === 'Staff' ? (
+        <div>
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+      ) : (
+        <div>
+          <input
+            type="text"
+            placeholder="Registration ID"
+            value={registrationId}
+            onChange={(e) => setRegistrationId(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+      )}
+      <button onClick={handleLogin}>Login</button>
+    </div>
+  );
+};
+
+export default Home;
+```
+
+### `users.json`
+Place this file in the `public` folder of your project.
+
+```json
+[
+  {
+    "username": "staff1",
+    "password": "password123"
+  },
+  {
+    "username": "staff2",
+    "password": "password456"
+  }
+]
+```
+
+### Backend Setup (Express Server for Parents Login)
+You'll need a basic backend setup for handling parents' login. Here's a minimal implementation using Express.js.
+
+```javascript
+// server.js
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
+const app = express();
+app.use(cors());
+app.use(bodyParser.json());
+
+const parents = [
+  { registrationId: 'parent1', password: 'password123' },
+  { registrationId: 'parent2', password: 'password456' }
+];
+
+app.post('/api/login', (req, res) => {
+  const { registrationId, password } = req.body;
+  const parent = parents.find(p => p.registrationId === registrationId && p.password === password);
+  if (parent) {
+    res.json({ success: true });
+  } else {
+    res.json({ success: false });
+  }
+});
+
+app.listen(5000, () => {
+  console.log('Server is running on port 5000');
+});
+```
+
+### Redirect Pages
+Ensure you have the `StaffDashboard.js` and `ParentDashboard.js` files as simple placeholders:
+
+```jsx
+// StaffDashboard.js
+import React from 'react';
+
+const StaffDashboard = () => {
+  return <h1>Welcome to the Staff Dashboard</h1>;
+};
+
+export default StaffDashboard;
+```
+
+```jsx
+// ParentDashboard.js
+import React from 'react';
+
+const ParentDashboard = () => {
+  return <h1>Welcome to the Parent Dashboard</h1>;
+};
+
+export default ParentDashboard;
+```
+
+### Setup React Router
+You should also set up React Router in your `App.js` to handle navigation between pages.
+
+```jsx
+// App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from './Home';
+import StaffDashboard from './StaffDashboard';
+import ParentDashboard from './ParentDashboard';
+
+function App() {
+  return (
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/StaffDashboard" component={StaffDashboard} />
+        <Route path="/ParentDashboard" component={ParentDashboard} />
+      </Switch>
+    </Router>
+  );
+}
+
+export default App;
+```
+
+### Running the Application
+1. Run the backend server using `node server.js`.
+2. Run the React application using `npm start` or `yarn start`.
+
+This setup should give you a functional login form with the specified requirements.
