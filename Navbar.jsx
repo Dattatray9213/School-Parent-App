@@ -41,3 +41,51 @@ export const Navbar = () => {
   );
 };
 
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./Navbar.css";
+
+export const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  
+  return (
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <button
+        className="navbar-toggler"
+        type="button"
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      
+      <div className={`collapse navbar-collapse ${menuOpen ? "show" : ""}`}>
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/">Home</NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/about">About</NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/circular">Circular</NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/holidayList">Holiday List</NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/feeDetails">Fee Details</NavLink>
+          </li>
+        </ul>
+        <ul className="navbar-nav">
+          {/* <li className="nav-item">
+            <NavLink className="nav-link" to="/login">Log In</NavLink>
+          </li> */}
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/register">Register</NavLink>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  );
+};
