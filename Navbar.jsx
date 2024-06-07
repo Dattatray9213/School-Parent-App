@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import "./Navbar.css";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -20,22 +20,19 @@ export const Navbar = () => {
           <NavLink to="/about">About</NavLink>
         </li>
         <li>
-          <NavLink to="/examination">Examination</NavLink>
+          <NavLink to="/circular">Circular</NavLink>
         </li>
         <li>
-          <NavLink to="/class">Class</NavLink>
+          <NavLink to="/holidayList">Holiday List</NavLink>
         </li>
         <li>
-          <NavLink to="/admissionprocess">Admission Process</NavLink>
-        </li>
-        <li>
-          <NavLink to="/careers">Careers</NavLink>
+          <NavLink to="/feeDetails">FeeDetails</NavLink>
         </li>
       </ul>
       <ul>
-        <li>
+        {/* <li>
           <NavLink to="/login">Log In</NavLink>
-        </li>
+        </li> */}
         <li>
           <NavLink to="/register">Register</NavLink>
         </li>
@@ -43,3 +40,4 @@ export const Navbar = () => {
     </nav>
   );
 };
+
