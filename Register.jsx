@@ -291,3 +291,244 @@ const Register = () => {
 };
 
 export default Register;
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parent Registration Form</title>
+  <link
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <div className="container mt-5">
+    <h2>Parent Registration Form</h2>
+    <form onSubmit={handleSubmit} className="registration-form">
+      <div className="form-row">
+        <div className="form-group col-md-6">
+          <input
+            type="text"
+            name="ParentName"
+            value={formData.ParentName}
+            onChange={handleChange}
+            placeholder="Parent Name"
+            className="form-control"
+          />
+          {errors.ParentName && (
+            <div style={{ color: "red" }}>{errors.ParentName}</div>
+          )}
+        </div>
+        <div className="form-group col-md-6">
+          <input
+            type="text"
+            name="StudentName"
+            value={formData.StudentName}
+            onChange={handleChange}
+            placeholder="Student Name"
+            className="form-control"
+          />
+          {errors.StudentName && (
+            <div style={{ color: "red" }}>{errors.StudentName}</div>
+          )}
+        </div>
+      </div>
+      <div className="form-row">
+        <div className="form-group col-md-6">
+          <input
+            type="text"
+            name="StudentRegisterNumber"
+            value={formData.StudentRegisterNumber}
+            onChange={handleChange}
+            placeholder="Student Register Number"
+            className="form-control"
+          />
+          {errors.StudentRegisterNumber && (
+            <div style={{ color: "red" }}>{errors.StudentRegisterNumber}</div>
+          )}
+        </div>
+        <div className="form-group col-md-6">
+          <input
+            type="text"
+            name="PrimaryContactPerson"
+            value={formData.PrimaryContactPerson}
+            onChange={handleChange}
+            placeholder="Primary Contact Person"
+            className="form-control"
+          />
+        </div>
+        <div className="form-group col-md-6">
+          <input
+            type="text"
+            name="PrimaryContactPersonMobile"
+            value={formData.PrimaryContactPersonMobile}
+            onChange={handleChange}
+            placeholder="Primary Contact Person Mobile"
+            className="form-control"
+          />
+          {errors.PrimaryContactPersonMobile && (
+            <div style={{ color: "red" }}>
+              {errors.PrimaryContactPersonMobile}
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="form-row">
+        <div className="form-group col-md-6">
+          <input
+            type="text"
+            name="SecondaryContactPerson"
+            value={formData.SecondaryContactPerson}
+            onChange={handleChange}
+            placeholder="Secondary Contact Person"
+            className="form-control"
+          />
+        </div>
+        <div className="form-group col-md-6">
+          <input
+            type="text"
+            name="SecondaryContactPersonMobile"
+            value={formData.SecondaryContactPersonMobile}
+            onChange={handleChange}
+            placeholder="Secondary Contact Person Mobile"
+            className="form-control"
+          />
+          {errors.SecondaryContactPersonMobile && (
+            <div style={{ color: "red" }}>
+              {errors.SecondaryContactPersonMobile}
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="form-row">
+        <div className="form-group col-md-4">
+          <input
+            type="text"
+            name="Address"
+            value={formData.Address}
+            onChange={handleChange}
+            placeholder="Address"
+            className="form-control"
+          />
+        </div>
+        <div className="form-group col-md-4">
+          <select
+            type="text"
+            name="State"
+            value={formData.State}
+            onChange={handleChange}
+            placeholder="State"
+            className="form-control"
+            required
+          >
+            <option value="">Select State</option>
+            {states.map((state) => (
+              <option key={state} value={state}>
+                {state}
+              </option>
+            ))}
+          </select>
+          {errors.State && <div style={{ color: "red" }}>{errors.State}</div>}
+        </div>
+        <div className="form-group col-md-4">
+          <select
+            type="text"
+            name="Country"
+            value={formData.Country}
+            onChange={handleChange}
+            placeholder="Country"
+            className="form-control"
+            required
+          >
+            <option value="">Select Country</option>
+            {Object.keys(countryStateData).map((country) => (
+              <option key={country} value={country}>
+                {country}
+              </option>
+            ))}
+          </select>
+          {errors.Country && <div style={{ color: "red" }}>{errors.Country}</div>}
+        </div>
+      </div>
+      <div className="form-row">
+        <div className="form-group col-md-4">
+          <input
+            type="text"
+            name="City"
+            value={formData.City}
+            onChange={handleChange}
+            placeholder="City"
+            className="form-control"
+          />
+          {errors.City && <div style={{ color: "red" }}>{errors.City}</div>}
+        </div>
+        <div className="form-group col-md-4">
+          <input
+            type="text"
+            name="ZipCode"
+            value={formData.ZipCode}
+            onChange={handleChange}
+            placeholder="Zip Code"
+            className="form-control"
+          />
+          {errors.ZipCode && <div style={{ color: "red" }}>{errors.ZipCode}</div>}
+        </div>
+        <div className="form-group col-md-4">
+          <input
+            type="email"
+            name="EmailAddress"
+            value={formData.EmailAddress}
+            onChange={handleChange}
+            placeholder="Email Address"
+            className="form-control"
+          />
+          {errors.EmailAddress && (
+            <div style={{ color: "red" }}>{errors.EmailAddress}</div>
+          )}
+        </div>
+      </div>
+      <div className="form-row">
+        <div className="form-group col-md-4">
+          <input
+            type="password"
+            name="Password"
+            value={formData.Password}
+            onChange={handleChange}
+            placeholder="Password"
+            className="form-control"
+          />
+        </div>
+        <div className="form-group col-md-4">
+          <input
+            type="password"
+            name="SetPassword"
+            value={formData.SetPassword}
+            onChange={handleChange}
+            placeholder="Set Password"
+            className="form-control"
+          />
+        </div>
+        <div className="form-group col-md-4">
+          <input
+            type="text"
+            name="Status"
+            value={formData.Status}
+            onChange={handleChange}
+            placeholder="Status"
+            className="form-control"
+          />
+        </div>
+      </div>
+      <button type="submit" className="btn btn-primary">
+        Register
+      </button>
+    </form>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
