@@ -532,3 +532,203 @@ export default Register;
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
+
+  import React from 'react';
+import { Form, Button, Col, Row } from 'react-bootstrap';
+
+const ParentRegistrationForm = ({ handleSubmit, handleChange, formData, errors, states, countryStateData }) => {
+  return (
+    <div className="container mt-5">
+      <h2>Parent Registration Form</h2>
+      <Form onSubmit={handleSubmit}>
+        <Form.Row>
+          <Form.Group as={Col} md="6">
+            <Form.Control
+              type="text"
+              name="ParentName"
+              value={formData.ParentName}
+              onChange={handleChange}
+              placeholder="Parent Name"
+            />
+            {errors.ParentName && <div style={{ color: 'red' }}>{errors.ParentName}</div>}
+          </Form.Group>
+          <Form.Group as={Col} md="6">
+            <Form.Control
+              type="text"
+              name="StudentName"
+              value={formData.StudentName}
+              onChange={handleChange}
+              placeholder="Student Name"
+            />
+            {errors.StudentName && <div style={{ color: 'red' }}>{errors.StudentName}</div>}
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group as={Col} md="4">
+            <Form.Control
+              type="text"
+              name="StudentRegisterNumber"
+              value={formData.StudentRegisterNumber}
+              onChange={handleChange}
+              placeholder="Student Register Number"
+            />
+            {errors.StudentRegisterNumber && <div style={{ color: 'red' }}>{errors.StudentRegisterNumber}</div>}
+          </Form.Group>
+          <Form.Group as={Col} md="4">
+            <Form.Control
+              type="text"
+              name="PrimaryContactPerson"
+              value={formData.PrimaryContactPerson}
+              onChange={handleChange}
+              placeholder="Primary Contact Person"
+            />
+          </Form.Group>
+          <Form.Group as={Col} md="4">
+            <Form.Control
+              type="text"
+              name="PrimaryContactPersonMobile"
+              value={formData.PrimaryContactPersonMobile}
+              onChange={handleChange}
+              placeholder="Primary Contact Person Mobile"
+            />
+            {errors.PrimaryContactPersonMobile && <div style={{ color: 'red' }}>{errors.PrimaryContactPersonMobile}</div>}
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group as={Col} md="4">
+            <Form.Control
+              type="text"
+              name="SecondaryContactPerson"
+              value={formData.SecondaryContactPerson}
+              onChange={handleChange}
+              placeholder="Secondary Contact Person"
+            />
+          </Form.Group>
+          <Form.Group as={Col} md="4">
+            <Form.Control
+              type="text"
+              name="SecondaryContactPersonMobile"
+              value={formData.SecondaryContactPersonMobile}
+              onChange={handleChange}
+              placeholder="Secondary Contact Person Mobile"
+            />
+            {errors.SecondaryContactPersonMobile && <div style={{ color: 'red' }}>{errors.SecondaryContactPersonMobile}</div>}
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group as={Col} md="4">
+            <Form.Control
+              type="text"
+              name="Address"
+              value={formData.Address}
+              onChange={handleChange}
+              placeholder="Address"
+            />
+          </Form.Group>
+          <Form.Group as={Col} md="4">
+            <Form.Control
+              as="select"
+              name="State"
+              value={formData.State}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select State</option>
+              {states.map((state) => (
+                <option key={state} value={state}>
+                  {state}
+                </option>
+              ))}
+            </Form.Control>
+            {errors.State && <div style={{ color: 'red' }}>{errors.State}</div>}
+          </Form.Group>
+          <Form.Group as={Col} md="4">
+            <Form.Control
+              as="select"
+              name="Country"
+              value={formData.Country}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Country</option>
+              {Object.keys(countryStateData).map((country) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              ))}
+            </Form.Control>
+            {errors.Country && <div style={{ color: 'red' }}>{errors.Country}</div>}
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group as={Col} md="4">
+            <Form.Control
+              type="text"
+              name="City"
+              value={formData.City}
+              onChange={handleChange}
+              placeholder="City"
+            />
+            {errors.City && <div style={{ color: 'red' }}>{errors.City}</div>}
+          </Form.Group>
+          <Form.Group as={Col} md="4">
+            <Form.Control
+              type="text"
+              name="ZipCode"
+              value={formData.ZipCode}
+              onChange={handleChange}
+              placeholder="Zip Code"
+            />
+            {errors.ZipCode && <div style={{ color: 'red' }}>{errors.ZipCode}</div>}
+          </Form.Group>
+          <Form.Group as={Col} md="4">
+            <Form.Control
+              type="email"
+              name="EmailAddress"
+              value={formData.EmailAddress}
+              onChange={handleChange}
+              placeholder="Email Address"
+            />
+            {errors.EmailAddress && <div style={{ color: 'red' }}>{errors.EmailAddress}</div>}
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group as={Col} md="4">
+            <Form.Control
+              type="password"
+              name="Password"
+              value={formData.Password}
+              onChange={handleChange}
+              placeholder="Password"
+            />
+          </Form.Group>
+          <Form.Group as={Col} md="4">
+            <Form.Control
+              type="password"
+              name="SetPassword"
+              value={formData.SetPassword}
+              onChange={handleChange}
+              placeholder="Set Password"
+            />
+          </Form.Group>
+          <Form.Group as={Col} md="4">
+            <Form.Control
+              type="text"
+              name="Status"
+              value={formData.Status}
+              onChange={handleChange}
+              placeholder="Status"
+            />
+          </Form.Group>
+        </Form.Row>
+        <Button type="submit" className="btn btn-primary">
+          Register
+        </Button>
+      </Form>
+    </div>
+  );
+};
+
+export default ParentRegistrationForm;
